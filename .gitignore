@@ -1,0 +1,55 @@
+# Node.js
+node_modules/
+
+# Output of webpack build
+dist/
+
+# TypeScript
+*.tsbuildinfo
+
+# Editor/IDE specific files
+.vscode/
+.idea/
+
+# Logs and crash reports
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Dependency directories
+/jspm_packages/
+/
+# TypeScript package manager
+.ts
+.tsbuildinfo
+.svelte
+# Yarn 1.x
+.yarn/cache/
+.yarn/unplugged/
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.*
+.ignored
+# Yarn 2.x
+.yarn/
+
+# pnpm
+.pnp/
+pnpm-lock.yaml
+*.pnpm-debug.log
+test/node_modules/
+
+# Optional: Cache directory for npm
+.npm/
+
+# Optional: Cache directory for yarn v2
+.yarn/cache/
+
+# Optional: Cache directory for pnpm
+pnpm-store/
+
+# Optional: Editor directories
+# (Add additional ones depending on your choice of code editor)
+.vscode/
+.idea/
