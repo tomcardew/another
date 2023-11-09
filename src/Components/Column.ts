@@ -5,7 +5,8 @@ import View, { DEFAULT_VIEW_STYLE } from "./View";
 class Column extends View {
     protected defaultStyle: CSSProperties = {
         ...DEFAULT_VIEW_STYLE,  // Inherit default styles from the base View class
-        flexDirection: 'column', // Additional style property specific to Column
+        flexDirection: 'column',
+        justifyContent: 'flex-start'
     }
 }
 
