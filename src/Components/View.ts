@@ -1,5 +1,6 @@
 import { css, CSSProperties, StyleDeclarationMap, StyleSheet } from "aphrodite";
 
+// Default styles for the View class
 const DEFAULT_VIEW_STYLE: CSSProperties = {
     display: 'flex',
     justifyContent: 'center',
@@ -7,52 +8,39 @@ const DEFAULT_VIEW_STYLE: CSSProperties = {
     flex: 1
 };
 
-/**
- * The `View` class represents a basic view element in a web application.
- * It handles both layout and styling.
- */
 class View {
-    /**
-     * The base HTML element type used for this view.
-     * By default, it is a "div" element.
-     */
+
+    // Base HTML element name for the view
     protected elementBaseName: string = "div";
 
-    /**
-     * An array of child views contained within this view.
-     */
+    // Array to store child views
     private children: View[];
 
-    protected defaultStyle: CSSProperties | StyleDeclarationMap = {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flex: 1
-    }
+    // Default style for the View class
+    protected defaultStyle: CSSProperties | StyleDeclarationMap = DEFAULT_VIEW_STYLE;
+
+    // Custom style for the View class
     private customStyle: CSSProperties | StyleDeclarationMap = {};
 
     /**
-     * Creates a new `View` instance.
-     *
-     * @param {...View} views - One or more `View` instances to be added as children of this view.
+     * Creates a new View instance with optional child views.
+     * @param {...View} views - Child views to add to this View.
      */
     constructor(...views: View[]) {
         this.children = views;
     }
 
     /**
-     * Adds one or more child views to this view.
-     *
-     * @param {...View} views - One or more `View` instances to be added as children.
+     * Add one or more child views to this View.
+     * @param {...View} views - Child views to add.
      */
     child(...views: View[]) {
         this.children = this.children.concat(views);
     }
 
     /**
-     * Renders the current `View` and its child views as an `HTMLElement`.
-     *
-     * @returns {HTMLElement} An `HTMLElement` representing the rendered view.
+     * Render the View as an HTML element.
+     * @returns {HTMLElement} - The rendered HTML element.
      */
     render(): HTMLElement {
         const element = document.createElement(this.elementBaseName);
@@ -67,6 +55,10 @@ class View {
         return element;
     }
 
+    /**
+     * Set custom styles for the View.
+     * @param {CSSProperties | StyleDeclarationMap} style - Custom styles to apply.
+     */
     style(style: CSSProperties | StyleDeclarationMap) {
         this.customStyle = style;
     }
