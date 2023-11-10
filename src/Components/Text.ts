@@ -38,6 +38,12 @@ class Text extends View {
         element.textContent = this.string; // Set the text content
         return element;
     }
+
+    setText(string: string) {
+        console.log("setting text to", string, "on", this.id);
+        this.string = string;
+        this.setNeedsRender()
+    }
 }
 
 export default Text;

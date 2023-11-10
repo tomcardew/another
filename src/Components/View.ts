@@ -1,4 +1,6 @@
 import { css, CSSProperties, StyleDeclarationMap, StyleSheet } from "aphrodite";
+import { v4 as uuid } from 'uuid';
+import { eventEmitter } from "../Engine/EventEmitter";
 
 // Default styles for the View class
 const DEFAULT_VIEW_STYLE: CSSProperties = {
@@ -9,25 +11,35 @@ const DEFAULT_VIEW_STYLE: CSSProperties = {
 };
 
 class View {
-
-    // Base HTML element name for the view
-    protected elementBaseName: string = "div";
-
     // Array to store child views
     private children: View[];
+
+    // Internal view id
+    private _id: string;
+    
+    // Custom style for the View class
+    private customStyle: CSSProperties | StyleDeclarationMap = {};
 
     // Default style for the View class
     protected defaultStyle: CSSProperties | StyleDeclarationMap = DEFAULT_VIEW_STYLE;
 
-    // Custom style for the View class
-    private customStyle: CSSProperties | StyleDeclarationMap = {};
+    // Base HTML element name for the view
+    protected elementBaseName: string = "div";
+
+    parent?: View;
 
     /**
      * Creates a new View instance with optional child views.
      * @param {...View} views - Child views to add to this View.
      */
     constructor(...views: View[]) {
-        this.children = views;
+        this._id = uuid();
+        this.children = [];
+        this.child(...views);
+    }
+
+    get id() {
+        return this._id.substring(0, 6);
     }
 
     /**
@@ -35,7 +47,24 @@ class View {
      * @param {...View} views - Child views to add.
      */
     child(...views: View[]) {
-        this.children = this.children.concat(views);
+        const _views = views.map(view => {
+            view.parent = this;
+            return view;
+        })
+        this.children = this.children.concat(_views);
+        this.setNeedsRender();
+    }
+
+    hasChild(view: View) {
+        return this.children.find((_view: View) => _view.id === view.id) !== undefined;
+    }
+
+    removeAllChildren() {
+        this.children = [];
+    }
+
+    protected setNeedsRender() {
+        eventEmitter.emit('render-view', this);
     }
 
     /**
@@ -44,6 +73,7 @@ class View {
      */
     render(): HTMLElement {
         const element = document.createElement(this.elementBaseName);
+        element.id = this.id;
         
         const style = StyleSheet.create({ [`default_${this.constructor.name}`]: this.defaultStyle, [this.constructor.name]: this.customStyle })
         element.className = css(style[`default_${this.constructor.name}`], style[this.constructor.name]);

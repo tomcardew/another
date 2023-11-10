@@ -5,18 +5,24 @@
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {
+    "@types/lodash": "^4.14.201",
+    "@types/uuid": "^9.0.7",
     "html-webpack-plugin": "^5.5.3",
     "ts-node": "^10.9.1",
-    "typescript": "^5.2.2"
+    "typescript": "^5.2.2",
+    "watch": "^1.0.2"
   },
   "dependencies": {
     "aphrodite": "^2.4.0",
+    "lodash": "^4.17.21",
+    "uuid": "^9.0.1",
     "webpack": "^5.89.0",
     "webpack-cli": "^5.1.4"
   },
   "scripts": {
     "build": "npx tsc && npx webpack",
     "webpack": "npx webpack",
-    "compile": "npx tsc"
+    "compile": "npx tsc",
+    "dev": "yarn build && open ./dist/index.html && watch 'yarn build' ./src"
   }
 }
