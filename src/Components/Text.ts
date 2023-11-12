@@ -1,9 +1,10 @@
+import { CSSProperties, StyleDeclarationMap } from "aphrodite";
 import View from "./View";
 
 // Text class represents a text element, extending the base View class
 class Text extends View {
-    // The base HTML element name for the Text class
     protected elementBaseName: string = "p";
+    protected defaultStyle: CSSProperties | StyleDeclarationMap = {};
 
     // Text content to display
     private string: string;
@@ -38,9 +39,12 @@ class Text extends View {
         element.textContent = this.string; // Set the text content
         return element;
     }
-
+    
+    /**
+     * Sets the text content.
+     * @param {string} string - The new text content to set.
+     */
     setText(string: string) {
-        console.log("setting text to", string, "on", this.id);
         this.string = string;
         this.setNeedsRender()
     }

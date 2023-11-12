@@ -1,11 +1,13 @@
 import View from "../Components/View";
 import Controller from "./Controller";
 import { eventEmitter } from "./EventEmitter";
+import Router from "./Router";
 
 // AppLoader class responsible for managing and running controllers
 class AppLoader {
     // Array to store registered controllers
     private controllers: Controller[] = [];
+    // private router: ant
     
     /**
      * Register one or more controllers with the AppLoader.
@@ -20,6 +22,7 @@ class AppLoader {
      * @param {HTMLElement} container - The container element where the view should be appended.
      */
     run(container: HTMLElement) {
+        new Router(...this.controllers);
         eventEmitter.on("render-controller", (element: HTMLElement) => {
             // TODO: Make sure the controller rendered is the actual controller when routing is enabled
             container.innerHTML = '';
@@ -27,13 +30,9 @@ class AppLoader {
         })
 
         eventEmitter.on("render-view-tree", (views: View[]) => {
-            // 1. Get top views -- ignore views inside current view
-            console.log(views);
-            // let topViews = views.filter((view: View) => view.parent === undefined)
             views.forEach((view: View) => {
                 const parent = document.getElementById(view.parent?.id ?? "body");
                 const node = document.getElementById(view.id);
-                console.log(parent);
                 node.parentNode.replaceChild(view.render(), node);
             })
         })

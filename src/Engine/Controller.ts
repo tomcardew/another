@@ -6,14 +6,15 @@ import { eventEmitter } from "./EventEmitter";
 // Controller class responsible for handling events, routing, and more
 class Controller {
     
-    // The view associated with the controller
-    protected view: View;
+    protected _name: string;
     protected _state: any;
+    protected view: View; // The view associated with the controller
 
     private updateStack: View[];
     private renderRequested: boolean = false;
 
     constructor() {
+        this._name = this.constructor.name;
         this.updateStack = [];
         this.view = new View();
         eventEmitter.on('render-view', (view: View) => this.addRenderRequest(view));
@@ -31,8 +32,11 @@ class Controller {
         }
     }
 
-    addRenderRequest(view: View) {
-        console.log("adding render request", view);
+    get name(): string {
+        return this._name;
+    }
+
+    private addRenderRequest(view: View) {
         this.updateStack.push(view);
         if (!this.renderRequested) {
             this.renderRequested = true;
