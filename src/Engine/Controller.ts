@@ -2,6 +2,7 @@ import { isEqual } from "lodash";
 
 import View from "../Components/View";
 import { eventEmitter } from "./EventEmitter";
+import { Theme } from "./Theme";
 
 // Controller class responsible for handling events, routing, and more
 class Controller {
@@ -12,6 +13,12 @@ class Controller {
 
     private updateStack: View[];
     private renderRequested: boolean = false;
+
+    private _theme: Theme;
+
+    set theme(theme: Theme) {
+        this._theme = theme;
+    }
 
     constructor() {
         this._name = this.constructor.name;

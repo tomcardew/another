@@ -3,6 +3,8 @@ import ArrayUtils from "./Utils/Array";
 
 export type Route = Record<string, Controller>;
 
+// TODO: This component should handle routing
+
 export default class Router {
 
     private routes: Route[];

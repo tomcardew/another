@@ -3,18 +3,29 @@ import View from "../Components/View";
 import Controller from "./Controller";
 import { eventEmitter } from "./EventEmitter";
 import Router from "./Router";
+import { DEFAULT_THEME, Theme } from "./Theme";
 
 // AppLoader class responsible for managing and running controllers
 class AppLoader {
     // Array to store registered controllers
     private controllers: Controller[] = [];
     // private router: ant
+    private _theme: Theme;
+
+    set theme(theme: Theme) {
+        this._theme = theme;
+    }
+
+    constructor() {
+        this._theme = new Theme(DEFAULT_THEME);
+    }
     
     /**
      * Register one or more controllers with the AppLoader.
      * @param {...Controller} controllers - Controllers to register.
      */
     register(...controllers: Controller[]) {
+        controllers.forEach(ctrl => ctrl.theme = this._theme);
         this.controllers = this.controllers.concat(controllers);
     }
 
