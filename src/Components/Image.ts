@@ -3,7 +3,10 @@ import View, { Style } from "./View";
 class Image extends View {
 
     protected elementBaseName: string = "img";
-    protected defaultStyle: Style = {};
+    protected defaultStyle: Style = {
+        width: '100%',
+        height: '100%'
+    };
 
     private source: string;
     private alt: string;

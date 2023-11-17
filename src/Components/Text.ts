@@ -2,7 +2,6 @@ import View, { Style } from "./View";
 
 // Text class represents a text element, extending the base View class
 class Text extends View {
-    protected elementBaseName: string = "p";
     protected defaultStyle: Style = {};
 
     // Text content to display
@@ -17,9 +16,10 @@ class Text extends View {
      * @param {string | number} fontSize - The font size of the text (default: 16).
      * @param {string} color - The color of the text (default: "black").
      */
-    constructor(string: string, fontSize: string | number = 16, color: string = "black") {
+    constructor(string: string, level: 'h1' | 'h2' | 'h3' | 'p' | 'span' = 'p', fontSize: string | number = 'unset', color: string = "black") {
         super(); // Call the constructor of the base class
         this.string = string;
+        this.elementBaseName = level;
         this.fontSize = fontSize;
 
         // Define the default style for the Text class
