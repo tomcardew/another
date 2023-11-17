@@ -1,10 +1,9 @@
-import { CSSProperties, StyleDeclarationMap } from "aphrodite";
-import View from "./View";
+import View, { Style } from "./View";
 
 // Text class represents a text element, extending the base View class
 class Text extends View {
     protected elementBaseName: string = "p";
-    protected defaultStyle: CSSProperties | StyleDeclarationMap = {};
+    protected defaultStyle: Style = {};
 
     // Text content to display
     private string: string;

@@ -1,8 +1,12 @@
 {
   "name": "another",
-  "version": "1.0.0",
+  "version": "0.0.1--pre-beta",
   "description": "another is a new js framework",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "/dist"
+  ],
   "license": "MIT",
   "devDependencies": {
     "@types/lodash": "^4.14.201",
@@ -19,10 +23,9 @@
     "webpack": "^5.89.0",
     "webpack-cli": "^5.1.4"
   },
-  "scripts": {
-    "build": "npx tsc && npx webpack",
-    "webpack": "npx webpack",
-    "compile": "npx tsc",
-    "dev": "yarn build && open ./dist/index.html && watch 'yarn build' ./src"
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tomcardew/another"
   }
 }

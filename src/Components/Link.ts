@@ -1,9 +1,8 @@
-import { CSSProperties, StyleDeclarationMap } from "aphrodite";
-import View from "./View";
+import View, { Style } from "./View";
 
 class Link extends View {
     protected elementBaseName: string = "a";
-    protected defaultStyle: CSSProperties | StyleDeclarationMap = {};
+    protected defaultStyle: Style = {};
 
     private url: string;
     private label: string;

@@ -7,7 +7,7 @@ import { eventEmitter } from "./EventEmitter";
 class Controller {
     
     protected _name: string;
-    protected _state: any;
+    private _state: any;
     protected view: View; // The view associated with the controller
 
     private updateStack: View[];

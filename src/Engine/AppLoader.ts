@@ -1,3 +1,4 @@
+import ViewUtils from "../Components/Utils/View";
 import View from "../Components/View";
 import Controller from "./Controller";
 import { eventEmitter } from "./EventEmitter";
@@ -30,10 +31,14 @@ class AppLoader {
         })
 
         eventEmitter.on("render-view-tree", (views: View[]) => {
-            views.forEach((view: View) => {
-                const parent = document.getElementById(view.parent?.id ?? "body");
+            console.log("render-view-tree", views)
+            let _views = ViewUtils.topMost(views);
+            _views.forEach((view: View) => {
                 const node = document.getElementById(view.id);
-                node.parentNode.replaceChild(view.render(), node);
+                if (node && node.parentNode) {
+                    console.log('replacing', node, "with", view.render())
+                    node.parentNode.replaceChild(view.render(), node);
+                }
             })
         })
 
